@@ -1,12 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:clean_architect/features/presentation/blocs/splash/splash_event.dart';
+import 'package:clean_architect/features/presentation/blocs/splash/splash_state.dart';
+import 'package:clean_architect/features/presentation/components/utility/color_resource.dart';
+import 'package:clean_architect/features/presentation/screens/home/home_screen.dart';
+import 'package:clean_architect/features/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
-import '../../../data/datasource/common/result.dart';
 import '../../../di/InjectionContainer.dart';
-import '../../blocs/InitialBloc.dart';
-import '../login/login_screen.dart';
-import '../navigation/bottom_navigation.dart';
+import '../../blocs/splash/splash_bloc.dart';
+import '../../components/utility/images.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String route = '/SplashScreen';
@@ -16,62 +19,40 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final bloc = sl<SplashBloc>();
 
   @override
   void initState() {
-    bloc.bindStatusStream.listen((event) {
-      print('build splash screen');
-      print('listen ${event.data}');
-      print(event);
-      if (event.state == CurrentState.SUCCESS) {
-        if (event.data != null) {
-          Get.offAndToNamed(LoginScreen.route);
-        } else {
-          Get.off(BottomNavScreen());
-        }
-      }
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: ColorResources.getPrimaryColor(),// Change to your desired color
+    ));
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: const EdgeInsets.only(bottom: 40),
-        width: double.infinity,
-        height: double.infinity,
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/img/logo.png',
-                width: Get.width / 5,
-                height: Get.height / 5,
-              ),
+      backgroundColor: ColorResources.getPrimaryColor(),
+      body: BlocProvider(
+        create: (context) => sl<SplashBloc>()..add(LoadingEvent()),
+        child: BlocListener<SplashBloc,SplashState>(
+          listener: (context,state){
+            if(state is Success){
+              Get.off(() => HomeScreen());
+            }
+            if(state is Failure){
+              Get.off(() => LoginScreen());
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 40),
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: Image.asset(Images.logo),
             ),
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: Column(
-                children: [
-                  Text('From', style: Theme.of(context).textTheme.button),
-                  SizedBox(
-                    child: Image.asset(
-                      'assets/img/meta.png',
-                      width: 50,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

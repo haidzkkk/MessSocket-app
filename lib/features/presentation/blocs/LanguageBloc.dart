@@ -82,10 +82,6 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     });
   }
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 }
 
 ///NOTED : fold is to listen event on Asynchronous Stream [left:Error], [right:Success]

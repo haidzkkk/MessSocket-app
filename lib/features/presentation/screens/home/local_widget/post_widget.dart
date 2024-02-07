@@ -45,7 +45,7 @@ class PostWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.videocam,
@@ -55,7 +55,7 @@ class PostWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.button!.copyWith(
                               color: Theme.of(context).colorScheme.primary))),
                   const VerticalDivider(width: 8.0),
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.photo_library,
@@ -65,7 +65,7 @@ class PostWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.button!.copyWith(
                               color: Theme.of(context).colorScheme.primary))),
                   const VerticalDivider(width: 8.0),
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.video_call,

@@ -7,7 +7,6 @@ class AppBarHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      brightness: Brightness.light,
       backgroundColor: Colors.white,
       title: const Text(
         'facebook',

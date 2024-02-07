@@ -9,7 +9,7 @@ const double mediumTexts = 14;
 const double smallText = 12;
 const double xSmallText = 10;
 
-const String fontName = 'MaisonNeue';
+const String fontName = 'Roboto';
 
 class MyTypography {
   MyTypography._();

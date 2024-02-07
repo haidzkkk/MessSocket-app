@@ -1,5 +1,4 @@
 import '../../../domain/entities/login/LoginModalEntity.dart';
-
 import 'package:flutter/foundation.dart';
 
 class SignEmailModel extends LoginModelEntity {

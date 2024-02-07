@@ -1,7 +1,8 @@
-import 'typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'palette.dart';
+import 'typography.dart';
 
 class CreateTheme {
   CreateTheme._();
@@ -10,13 +11,6 @@ class CreateTheme {
     elevation: 0.0,
   );
 
-  // static const textTheme = TextTheme(
-  //   headline1: TextStyle(
-  //     fontSize: 30,
-  //     fontWeight: FontWeight.bold,
-  //     color: Colors.white,
-  //   ),
-  // );
   static const textTheme = TextTheme(
     headline1: TextStyle(
       fontFamily: fontName,
@@ -101,7 +95,6 @@ class CreateTheme {
     //     primary: Colors.black, brightness: Brightness.light),
     disabledColor: Colors.grey,
     dividerColor: Palette.dividerColor.withOpacity(0.5),
-    accentColor: Palette.primaryColor,
     backgroundColor: Colors.white,
     hintColor: Colors.grey,
     appBarTheme: appBarTHeme,
@@ -141,11 +134,9 @@ class CreateTheme {
     //     primary: Colors.white, brightness: Brightness.light),
     disabledColor: Palette.disabledColor,
     dividerColor: Palette.dividerColor.withOpacity(0.5),
-    accentColor: Palette.primaryColor,
     backgroundColor: Colors.white,
     hintColor: Colors.grey,
-    appBarTheme: appBarTHeme.copyWith(
-        brightness: Brightness.dark, color: Colors.grey[900]),
+    appBarTheme: appBarTHeme.copyWith(color: Colors.grey[900]),
     textTheme: textTheme,
     inputDecorationTheme:
         inputDecorationTheme.copyWith(fillColor: Colors.grey[800]),

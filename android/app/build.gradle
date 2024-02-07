@@ -26,34 +26,39 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 29
+    namespace "com.example.clean_architect"
+    /*compileSdkVersion flutter.compileSdkVersion*/
+    compileSdkVersion 34
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
     defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.clean_architect"
-        minSdkVersion 16
-        targetSdkVersion 29
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        multiDexEnabled true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
-        }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
-        }
-        debug {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
     }
@@ -65,16 +70,19 @@ android {
         development {
             dimension "app"
             applicationId "com.example.clean_architect"
+            resValue "string", "app_name", "Development Flutter Flavors"
         }
 
         staging {
             dimension "app"
             applicationId "com.example.clean_architect"
+            resValue "string", "app_name", "Staging Flutter Flavors"
         }
 
         production {
             dimension "app"
             applicationId "com.example.clean_architect"
+            resValue "string", "app_name", "Production Flutter Flavors"
         }
 
     }
@@ -86,4 +94,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
 }

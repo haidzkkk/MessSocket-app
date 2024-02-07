@@ -37,12 +37,7 @@ Future<void> main() async {
     disableErrorWidget();
 
     SystemChrome.setPreferredOrientations([]).then((_) {
-      BlocOverrides.runZoned(
-        () => {
-          runApp(const MyApp()),
-        },
-        blocObserver: MyBlocObserver(),
-      );
+      runApp(const MyApp());
     });
 
     ///[console] flavor running hidden when release mode
