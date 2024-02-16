@@ -32,12 +32,16 @@ class LoginScreen extends StatelessWidget {
                 Center(child: Image.asset(Images.bigLogo,width: 200,height: 200,)),
                 Text('Đăng nhập',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700,color: Colors.grey.shade700),),
                 SizedBox(height: Get.height*0.016,),
-                BlocBuilder<SignInBloc,SignInState>(builder: (context,state){
+                BlocBuilder<SignInBloc,LoginState>(builder: (context,state){
                   return TextField(
                     controller: _usernameCtrl,
+                    keyboardType: TextInputType.text,
+                    onChanged: (username){
+                      context.read<SignInBloc>().add(OnEmailChange(username));
+                    },
                     style: const TextStyle(fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
-                      errorText: state is EmptyUsername ? "Không được bỏ trống" : null,
+                      errorText: state.username.isEmpty ? "Không được bỏ trống" : null,
                       prefixIcon: const Icon(Icons.person),
                       hintText: 'Email/Username đã đăng ký',
                       hintStyle: const TextStyle(fontWeight: FontWeight.w400),
@@ -45,22 +49,25 @@ class LoginScreen extends StatelessWidget {
                   );
                 }),
                 SizedBox(height: Get.height*0.016,),
-                BlocBuilder<SignInBloc,SignInState>(
+                BlocBuilder<SignInBloc,LoginState>(
                   builder: (context,state){
                     return TextField(
                       controller: _passwordCtrl,
+                      onChanged: (password){
+                        context.read<SignInBloc>().add(OnPasswordChange(password));
+                      },
                       style: const TextStyle(fontWeight: FontWeight.w400),
-                      obscureText: state is PasswordHiddenState || state is SignInInitial,
+                      obscureText: !state.isShowPassword,
                       decoration: InputDecoration(
-                          errorText: state is EmptyPassword ? "Không được bỏ trống" : null,
+                          errorText: state.password.isEmpty ? "Không được bỏ trống" : null,
                           prefixIcon: const Icon(Icons.lock),
                           hintText: 'Mật khẩu',
                           hintStyle: const TextStyle(fontWeight: FontWeight.w400),
                           suffixIcon: InkWell(
                             onTap: (){
-                              context.read<SignInBloc>().add(TogglePasswordVisibility());
+                              context.read<SignInBloc>().add(TogglePasswordVisibility(isShowPassword: !state.isShowPassword));
                             },
-                            child: state is PasswordHiddenState || state is SignInInitial ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                            child: state.isShowPassword ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
                           )
                       ),
                     );
@@ -69,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: Get.height*0.06,),
                 ElevatedButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.read<SignInBloc>().add(PressLogin(_usernameCtrl.text, _passwordCtrl.text));
                     },
                     style: ElevatedButton.styleFrom(

@@ -1,13 +1,28 @@
-abstract class SignInState{}
+import 'package:equatable/equatable.dart';
 
-class SignInInitial extends SignInState{}
+class LoginState extends Equatable{
+  final String username;
+  final String password;
+  final bool isShowPassword;
 
-class PasswordVisibilityState extends SignInState{}
+  const LoginState({
+    this.username = '.',
+    this.password = '.',
+    this.isShowPassword = false
+  });
 
-class PasswordHiddenState extends SignInState{}
+  LoginState copyWith({
+    String? username,
+    String? password,
+    bool? isShowPassword
+  }){
+    return LoginState(
+      username: username ?? this.username,
+      password:  password ?? this.password,
+      isShowPassword: isShowPassword ?? this.isShowPassword
+    );
+  }
 
-class EmptyUsername extends SignInState{}
-
-class EmptyPassword extends SignInState{}
-
-class LoadingLogin extends SignInState{}
+  @override
+  List<Object?> get props => [username,password,isShowPassword];
+}

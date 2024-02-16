@@ -132,7 +132,7 @@ class ApiClient extends GetxService {
   }
 
   Future<Response> putData(String uri, dynamic body,
-      {required Map<String, String> headers}) async {
+      {required Map<String, String>? headers}) async {
     try {
       if (Foundation.kDebugMode) {
         print('====> API Call: $uri\nHeader: $_mainHeaders');
