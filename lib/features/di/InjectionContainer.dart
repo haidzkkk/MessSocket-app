@@ -1,5 +1,6 @@
 import 'package:clean_architect/features/data/api/api_client.dart';
 import 'package:clean_architect/features/data/repositories/app_repository_impl.dart';
+import 'package:clean_architect/features/data/repositories/auth_repo.dart';
 import 'package:clean_architect/features/data/repositories/splash_repo.dart';
 import 'package:clean_architect/features/domain/repositories/AppRepository.dart';
 import 'package:clean_architect/features/domain/usecases/GetPreferredLanguageUseCase.dart';
@@ -56,7 +57,7 @@ Future<void> init() async {
   ///[Bloc]
   ///
   sl.registerFactory(() => SplashBloc());
-  sl.registerFactory(() => SignInBloc());
+  sl.registerFactory(() => SignInBloc(repo: sl()));
   sl.registerFactory(() => SignBloc());
   sl.registerFactory(
     () => LanguageBloc(
@@ -84,4 +85,5 @@ Future<void> init() async {
     () => AppRepositoryImpl(bindingDataSourceFactory: sl()),
   );
   sl.registerFactory(() => SplashRepo(apiClient: sl(), sharedPreferences: sl()));
+  sl.registerFactory(() => AuthRepo(apiClient: sl(), sharedPreferences: sl()));
 }

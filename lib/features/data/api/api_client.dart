@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../common/constants/app_constants.dart';
+import '../../common/constants/pref_constants.dart';
 import '../models/response/error_response.dart';
 
 class ApiClient extends GetxService {
@@ -20,7 +21,8 @@ class ApiClient extends GetxService {
   Map<String, String> _mainHeaders = {};
 
   ApiClient({required this.sharedPreferences}) {
-    token = sharedPreferences.getString(AppConstants.TOKEN) ??
+    String? tokenLocal = sharedPreferences.getString(Constants.keyAccessToken);
+    token = tokenLocal != null  ? 'Bearer $tokenLocal' :
         'Basic Y29yZV9jbGllbnQ6c2VjcmV0';
     if (Foundation.kDebugMode) {
       print('Token: $token');

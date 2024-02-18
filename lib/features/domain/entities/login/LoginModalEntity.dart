@@ -11,4 +11,12 @@ class LoginModelEntity extends Equatable {
 
   @override
   List<Object> get props => [accessToken!, refreshToken!];
+
+  factory LoginModelEntity.fromJson(dynamic json) {
+    return LoginModelEntity(
+      accessToken : json['accessToken'],
+      refreshToken : json['refreshToken'],
+
+    );
+  }
 }

@@ -3,8 +3,9 @@ import '../../presentation/components/utility/images.dart';
 
 class AppConstants{
   /// api
-  static const String BASE_URL = 'http://timesheet-dev.oceantech.com.vn';
-  static const String GET_CURRENT_USER = '/timesheet/api/v1/users/current';
+  static const String BASE_URL = 'http://192.168.1.10:3000';
+  static const String GET_CURRENT_USER = '/api/getCurrentUser';
+  static const String POST_LOGIN = '/api/signin';
   /// sharepreferent key
   static const String TOKEN = 'token';
   static const String LANGUAGE_CODE = 'language_code';

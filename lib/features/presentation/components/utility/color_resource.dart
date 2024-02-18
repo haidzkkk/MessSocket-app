@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ColorResources {
   static Color getPrimaryColor() {
-    return Get.isDarkMode ? Colors.green :  const Color(0xFF87CEEB);
+    return Get.isDarkMode ? Colors.green :  const Color(0xFFC5A585);
   }
 
   static Color getPrimaryTextColor() {

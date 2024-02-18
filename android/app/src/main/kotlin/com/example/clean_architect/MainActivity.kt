@@ -1,4 +1,4 @@
-package com.example.clean_architect
+package com.example.messsocket
 
 import io.flutter.embedding.android.FlutterActivity
 

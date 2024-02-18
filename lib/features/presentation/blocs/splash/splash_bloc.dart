@@ -15,12 +15,12 @@ class SplashBloc extends Bloc<SplashEvent,SplashState>{
   Future<int> getCurrentUser(SplashEvent event, Emitter<SplashState> emit) async {
     Response response = await repo.getCurrentUser();
     delay(1000);
-    if(response.statusCode == 200 && response.body['code'] == 200){
+    if(response.statusCode == 200){
       emit(Success());
     }
     else{
       emit(Failure());
     }
-    return response.body['code']!;
+    return response.statusCode!;
   }
 }
